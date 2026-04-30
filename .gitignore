@@ -8,6 +8,9 @@ Icon
 # Netlify (no longer used — we deploy via Cloudflare Pages)
 .netlify/
 
+# Wrangler local cache (state, not source)
+.wrangler/
+
 # Editor / IDE
 .vscode/
 .idea/
