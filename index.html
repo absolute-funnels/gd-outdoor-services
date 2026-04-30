@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6D0LNSMN8T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6D0LNSMN8T');
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -1660,6 +1669,14 @@
 
         <div class="fade-in fade-in-delay-1">
           <form class="lead-form" id="leadForm" novalidate>
+            <!-- Web3Forms config — emails greg@gdoutdoorservices.ca on every lead -->
+            <input type="hidden" name="access_key" value="25cedb67-b51f-4014-82a3-9311e5dc26fa" />
+            <input type="hidden" name="subject" value="New Lead — Home Page (gdoutdoorservices.ca)" />
+            <input type="hidden" name="from_name" value="GD Outdoor Services Website" />
+            <input type="hidden" name="source_page" value="index.html" />
+            <!-- Honeypot for spam protection (hidden from users, bots fill it) -->
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+
             <div class="form-title">Get a Free Quote</div>
             <div class="form-subtitle">We'll respond within 1 business day</div>
 
@@ -1962,10 +1979,12 @@
     }, { threshold: 0.5 });
     countEls.forEach(el => countObserver.observe(el));
 
-    // ── Lead form ──
+    // ── Lead form (Web3Forms + n8n lead-tracking webhook) ──
     const leadForm = document.getElementById('leadForm');
     const formSuccess = document.getElementById('formSuccess');
-    leadForm.addEventListener('submit', (e) => {
+    const N8N_WEBHOOK_URL = 'https://n8n.ordersup.ca/webhook/gd-outdoor-services-lead';
+
+    leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const required = leadForm.querySelectorAll('[required]');
       let valid = true;
@@ -1977,11 +1996,41 @@
         }
       });
       if (!valid) return;
-      // Show success (wire to GHL webhook or email handler)
-      leadForm.style.display = 'none';
-      formSuccess.style.display = 'block';
-      // TODO: POST form data to Go High Level webhook
-      // fetch('YOUR_GHL_WEBHOOK_URL', { method:'POST', body: new FormData(leadForm) });
+
+      const submitBtn = leadForm.querySelector('.form-submit');
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const formData = new FormData(leadForm);
+
+      try {
+        // 1. Submit to Web3Forms — emails greg@gdoutdoorservices.ca
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+        const result = await response.json();
+        if (!result.success) throw new Error(result.message || 'Web3Forms error');
+
+        // 2. Fire n8n webhook (non-blocking, for lead tracking / sheet logging)
+        if (N8N_WEBHOOK_URL && !N8N_WEBHOOK_URL.includes('PLACEHOLDER')) {
+          fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(formData))
+          }).catch(err => console.warn('Lead tracking webhook failed:', err));
+        }
+
+        // 3. Show success UI
+        leadForm.style.display = 'none';
+        formSuccess.style.display = 'block';
+      } catch (err) {
+        console.error('Form submission error:', err);
+        alert('Sorry — there was an issue submitting your request. Please call us at 506-566-2233 or try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
     });
 
     // ── Before / After Sliders ──
