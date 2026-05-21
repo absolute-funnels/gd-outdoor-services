@@ -42,3 +42,7 @@ build/
 
 # Logs
 *.log
+
+# Local-only video backups (don't ship to Pages)
+carpentry_original.mp4
+*_PREVIEW.mp4

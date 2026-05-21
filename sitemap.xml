@@ -80,4 +80,16 @@
     <priority>0.85</priority>
     <changefreq>monthly</changefreq>
   </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://gdoutdoorservices.ca/privacy.html</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://gdoutdoorservices.ca/terms.html</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
 </urlset>

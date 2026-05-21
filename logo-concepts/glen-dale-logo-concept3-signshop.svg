@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" role="img" aria-label="Glen and Dale Outdoor Services">
+  <!-- Concept 3: Sign-shop retro — banner / shield, condensed serif, hand-painted feel -->
+  <defs>
+    <style>
+      .c3-shield { fill: #8B3A1F; stroke: #1A1A1A; stroke-width: 3; }
+      .c3-shield-inner { fill: none; stroke: #F5E6C8; stroke-width: 1.5; }
+      .c3-banner-text { fill: #F5E6C8; font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-style: italic; }
+      .c3-word { fill: #1A1A1A; font-family: "Playfair Display", Georgia, serif; font-weight: 900; }
+      .c3-sub { fill: #8B3A1F; font-family: Georgia, serif; font-style: italic; font-weight: 400; }
+    </style>
+  </defs>
+  <!-- Shield -->
+  <path class="c3-shield" d="M 25,15 L 95,15 L 95,80 Q 95,115 60,125 Q 25,115 25,80 Z"/>
+  <path class="c3-shield-inner" d="M 35,25 L 85,25 L 85,78 Q 85,108 60,116 Q 35,108 35,78 Z"/>
+  <text class="c3-banner-text" x="60" y="78" font-size="40" text-anchor="middle">G&amp;D</text>
+  <!-- Wordmark -->
+  <text class="c3-word" x="115" y="58" font-size="36">Glen &amp; Dale</text>
+  <text class="c3-sub" x="115" y="92" font-size="16">Outdoor Services &#8226; Est. Saint John, NB</text>
+</svg>
