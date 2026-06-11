@@ -46,3 +46,6 @@ build/
 # Local-only video backups (don't ship to Pages)
 carpentry_original.mp4
 *_PREVIEW.mp4
+deploy-*.zip
+nohup.out
+.DS_Store
