@@ -143,4 +143,31 @@
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
+
+  <!-- Fredericton pages -->
+  <url>
+    <loc>https://gdoutdoorservices.ca/excavation-fredericton.html</loc>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://gdoutdoorservices.ca/retaining-walls-fredericton.html</loc>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://gdoutdoorservices.ca/landscaping-fredericton.html</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://gdoutdoorservices.ca/carpentry-fredericton.html</loc>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://gdoutdoorservices.ca/snowplowing-fredericton.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>
